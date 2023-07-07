@@ -1,0 +1,23 @@
+{
+  "name": "cdn",
+  "version": "1.0.0",
+  "description": "A CDN project for delivering JS/CSS files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MetaNaveen@github.com/MetaNaveen/cdn.git"
+  },
+  "keywords": [
+    "CDN",
+    "Sentinel"
+  ],
+  "author": "Naveen Kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MetaNaveen/cdn/issues"
+  },
+  "homepage": "https://github.com/MetaNaveen/cdn#readme"
+}
