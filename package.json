@@ -1,5 +1,5 @@
 {
-  "name": "cdn",
+  "name": "@metanaveen/cdn",
   "version": "1.0.0",
   "description": "A CDN project for delivering JS/CSS files.",
   "main": "index.js",
