@@ -29,9 +29,13 @@ h1 {
 	  }
 
 form {
-  width: 500px;
-  margin: 0 auto;
-  display: none;
+	width: 500px;
+	margin: 0 auto;
+	display: none;
+	/*border*/
+	border-radius: 25px;
+	background-color: lightgray;
+	padding: 10px;
 }
 
   form.visible {
