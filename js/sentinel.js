@@ -13,27 +13,27 @@ document.addEventListener('DOMContentLoaded', function () {
    var loginForm = document.getElementById('loginForm');
    var requestToRegisterForm = document.getElementById('requestToRegisterForm');
 
-    loginForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        login();
-    });
+   loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      login();
+   });
 
-    requestToRegisterForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        requestToRegister();
-    });
+   requestToRegisterForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      requestToRegister();
+   });
 
-    toggleButton.addEventListener('click', function () {
-        toggleForm();
-    });
+   toggleButton.addEventListener('click', function () {
+      toggleForm();
+   });
 
-    loginForm.classList.add('visible');
+   loginForm.classList.add('visible');
 });
 
 function toggleForm() {
    isLoginFormVisible = !isLoginFormVisible;
    if (isLoginFormVisible) {
-      toggleButtonHeader.textContent = "Register with";
+      toggleButtonHeader.textContent = "New User?";
       toggleButton.textContent = "Request Login";
       loginForm.classList.add('visible');
       requestToRegisterForm.classList.remove('visible');
@@ -51,10 +51,10 @@ function login() {
    var redirectUriInput = document.querySelector('[name="redirectUri"]');
    var redirectUri = redirectUriInput.value;
 
-   var selectedOption = document.getElementById('redirectOption')?.value ?? "userPage";
-   console.log('Selected option value: ' + selectedOption);
-   if (selectedOption == 'userPage') redirectUri = "/user/dashboard";
-   else if (selectedOption == 'adminPage') redirectUri = "/admin/dashboard";
+   //var selectedOption = document.getElementById('redirectOption')?.value ?? redirectUri;
+   //console.log('Selected option value: ' + selectedOption);
+   //if (selectedOption == 'userPage') redirectUri = "/user/dashboard";
+   //else if (selectedOption == 'adminPage') redirectUri = "/admin/dashboard";
 
    var data = {
       email: username,
@@ -84,8 +84,7 @@ function login() {
          if (redirectUri) {
             console.log("Redirect URI: " + redirectUri);
             console.log(data);
-            //window.location.href = redirectUri;
-            window.location.href = "/user/dashboard";
+            window.location.href = redirectUri;
          } else {
             console.log("Redirection Failed!!!");
             console.log(data);
@@ -101,36 +100,6 @@ function login() {
 
 function logoutUser() {
    window.location.href = "/logout";
-}
-
-function promoteUser(email) {
-   console.log(`Promoting user ${email}...`);
-   var data = {
-      email: email,
-   };
-
-   fetch('/api/auth/promote', {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-   })
-      .then(function (response) {
-         if (response.ok) {
-            return response.json();
-         }
-         throw new Error('API request failed');
-      })
-      .then(function (response) {
-         console.log("User Promoted");
-         console.log(response);
-      })
-      .catch(function (error) {
-         clearFields();
-         console.log("Error: ", error);
-         result.textContent = 'Invalid credentials or User not activated';
-      });
 }
 
 function clearFields() {
@@ -194,5 +163,70 @@ function requestToRegister() {
          clearFields();
          console.log("Error: ", error);
          result.textContent = error; // 'Invalid username/email or login already requested.';
+      });
+}
+
+// ADMIN FUNCTIONS
+
+function approveUser(email) {
+   let data = {
+      email: email
+   };
+
+   fetch('/api/auth/approve', {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+   })
+      .then(response => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
+         }
+         return response.json();
+      })
+      .then(data => {
+         // Handle the success response
+         alert('User account activated!');
+         window.location.reload();
+      })
+      .catch(error => {
+         // Handle any errors that occurred during the fetch
+         console.error('Error approving user:', error);
+         alert('Error approving user: ' + error.message);
+      });
+}
+
+
+function promoteUser(email) {
+   console.log(`Promoting user ${email}...`);
+   var data = {
+      email: email,
+   };
+
+   fetch('/api/auth/promote', {
+      method: 'POST',
+      headers: {
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+   })
+      .then(function (response) {
+         if (response.ok) {
+            return response.json();
+         }
+         throw new Error('API request failed');
+      })
+      .then(function (response) {
+         console.log("User Promoted");
+         console.log(response);
+         alert('User account promoted!');
+         window.location.reload();
+      })
+      .catch(function (error) {
+         clearFields();
+         console.log("Error: ", error);
+         result.textContent = 'Invalid credentials or User not activated';
       });
 }

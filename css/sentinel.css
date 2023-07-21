@@ -1,3 +1,8 @@
+body {
+	overflow-y: hidden;
+	font-family: Arial, sans-serif;
+}
+
 .user-login-container {
 	display: flex;
 	flex-flow: column;
@@ -5,7 +10,6 @@
 	align-items: center;
 	height: 100vh;
 	margin: 0 !important;
-	font-family: Arial, sans-serif;	
 }
 
 .toggle-container {
@@ -78,8 +82,7 @@ input[type="submit"] {
 	background-color: darkslategray;
 	color: white;
 }
-/*
-.navbar-nav .nav-item:hover {
-	background-color: darkslategray;
-	color: white;
-}*/
+
+.container {
+	max-width: 95%;
+}
