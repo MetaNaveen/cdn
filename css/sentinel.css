@@ -1,28 +1,26 @@
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
-h1 {
-  text-align: center;
+.user-login-container {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0 !important;
+	font-family: Arial, sans-serif;	
 }
 
 .toggle-container {
   text-align: right;
   margin-bottom: 20px;
+  margin-left: auto;
 }
 
-  .toggle-container button {
+/*  .toggle-container button {
 	  background: none;
 	  border: none;
 	  color: blue;
 	  text-decoration: none;
 	  cursor: pointer;
-  }
+  }*/
 
 	  .toggle-container button:focus {
 		  outline: none;
@@ -72,3 +70,16 @@ input[type="submit"] {
   text-align: center;
   margin-top: 20px;
 }
+
+
+/*------------------------BOOTSTRAP OVERRIDE--------------------------*/
+
+.navbar-nav > .active > a {
+	background-color: darkslategray;
+	color: white;
+}
+/*
+.navbar-nav .nav-item:hover {
+	background-color: darkslategray;
+	color: white;
+}*/
